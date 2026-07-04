@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MM2 Trade Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+
+    <div id="auth-container" class="auth-wrapper">
+        <div class="auth-box">
+            <h2>MM2 Trade Hub</h2>
+            <div id="auth-forms">
+                <div id="signup-form">
+                    <h3>Create Account</h3>
+                    <input type="text" id="signup-user" placeholder="Roblox Username">
+                    <input type="password" id="signup-pass" placeholder="Password (Min 6 chars)">
+                    <button onclick="handleSignUp()">Register</button>
+                    <p>Already have an account? <span onclick="toggleAuth(false)">Sign In</span></p>
+                </div>
+                <div id="signin-form" class="hidden">
+                    <h3>Sign In</h3>
+                    <input type="text" id="signin-user" placeholder="Roblox Username">
+                    <input type="password" id="signin-pass" placeholder="Password">
+                    <button onclick="handleSignIn()">Sign In</button>
+                    <p>Need an account? <span onclick="toggleAuth(true)">Register</span></p>
+                </div>
+            </div>
+            <button class="rules-btn" onclick="openRules()">View Rules</button>
+        </div>
+    </div>
+
+    <div id="app-container" class="hidden">
+        <header>
+            <div class="logo-area">
+                <h1>MM2 Trade Hub</h1>
+                <span class="disclaimer">values might be incorrect because the values change all the time.</span>
+            </div>
+            <nav>
+                <span id="welcome-msg">Welcome, User</span>
+                <button onclick="openTradeSquare()" class="nav-trade-btn">Trading Square</button>
+                <button onclick="handleSignOut()" class="logout-btn">Sign Out</button>
+            </nav>
+        </header>
+
+        <main>
+            <section class="market-section">
+                <h2>Item Database</h2>
+                <input type="text" id="search-bar" placeholder="Search knives, guns, pets..." oninput="filterItems()">
+                
+                <div id="item-grid" class="item-grid">
+                    </div>
+            </section>
+
+            <section class="listings-section">
+                <div class="section-header">
+                    <h2>Public Trade Offers</h2>
+                    <button onclick="openCreateListing()" class="action-btn">+ Post an Offer</button>
+                </div>
+                <div id="listings-container">
+                    </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Support us! Donate Robux using the app to user: <strong>ni544366</strong></p>
+        </footer>
+    </div>
+
+    <div id="rules-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Website Rules</h3>
+            <p>Hi, this is an MM2 trading website. When you create an account, remember that your username should match your Roblox username, but not your password of course.</p>
+            <button onclick="closeModal('rules-modal')">Close</button>
+        </div>
+    </div>
+
+    <div id="offer-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Create a Trade Offer</h3>
+            <label>Your Offer:</label>
+            <select id="offer-have"></select>
+            <label>What You Want:</label>
+            <select id="offer-want"></select>
+            <div class="modal-actions">
+                <button onclick="submitListing()">Publish Offer</button>
+                <button onclick="closeModal('offer-modal')" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="trade-square-modal" class="modal hidden">
+        <div class="trade-square">
+            <h3>MM2 Trading Square</h3>
+            <div class="trade-slots">
+                <div class="trade-side">
+                    <h4 id="local-trader-name">You</h4>
+                    <div class="slot-box" id="local-slot">Empty Slot</div>
+                    <select id="local-select-item" onchange="updateSlot('local')">
+                        <option value="">Select Weapon</option>
+                    </select>
+                </div>
+                <div class="trade-divider">VS</div>
+                <div class="trade-side">
+                    <h4 id="remote-trader-name">Trader</h4>
+                    <div class="slot-box" id="remote-slot">Empty Slot</div>
+                    <select id="remote-select-item" onchange="updateSlot('remote')">
+                        <option value="">Select Weapon</option>
+                    </select>
+                </div>
+            </div>
+            <div class="trade-actions">
+                <button onclick="proceedTrade()" class="proceed-btn">Proceed in MM2</button>
+                <button onclick="declineTrade()" class="decline-btn">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
